@@ -110,9 +110,9 @@ const cameraBeautyPlugin = trtcCloud.addPlugin({
   type: 1,
 });
 // 设置美颜参数
-cameraBeautyPlugin1.setParameter(JSON.stringify(params));
+cameraBeautyPlugin.setParameter(JSON.stringify(params));
 // 启动美颜
-cameraBeautyPlugin1.enable();
+cameraBeautyPlugin.enable();
 ```
 
 2. 关闭美颜
