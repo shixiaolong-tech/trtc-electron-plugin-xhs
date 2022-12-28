@@ -1,0 +1,5 @@
+*.pdb
+*.zip
+
+**/x64
+**/dist-temp

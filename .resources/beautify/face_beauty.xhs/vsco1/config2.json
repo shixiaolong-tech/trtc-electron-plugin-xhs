@@ -1,0 +1,136 @@
+{
+    "verson": 1,
+    "type": 16,
+    "filterlist": {
+        "group_count": 6,
+        "groups": [
+        {
+            "effect_count": 1,
+            "effects": [{
+                "type": "Lookup",
+                "param_count": 1,
+                "param": [{
+                    "name": "strenth",
+                    "value": 1.0
+                }],
+                "res_count": 1,
+                "res": [{
+                    "name": "001.png",
+                    "width": 512,
+                    "height": 512
+                    
+                }]
+            }]
+        },
+        
+        {
+            "effect_count": 1,
+            "effects": [{
+                "type": "Sharpen",
+                "param_count": 1,
+                "param": [{
+                    "name": "strenth",
+                    "value": 1.0
+                }],
+                "res_count": 0
+            }]
+        },
+        
+        {
+            "effect_count": 1,
+            "effects": [
+            {
+                "type": "Clarity",
+                "param_count": 1,
+                "param": [{
+                    "name": "strenth",
+                    "value": 1.0
+                }],
+                "res_count": 0
+            }]
+        },
+        
+        
+        {
+            "effect_count": 1,
+            "effects": [{
+                "type": "Grain",
+                "param_count": 1,
+                "param": [{
+                    "name": "strenth",
+                    "value": 1.0
+                }],
+                "res_count": 0
+            }]
+        },
+        
+        {
+            "effect_count": 1,
+            "effects": [
+            {
+                "type": "Vignette",
+                "param_count": 1,
+                "param": [{
+                    "name": "strenth",
+                    "value": 1.0
+                }],
+                "res_count": 0
+            }]
+        },
+        
+        
+        {
+            "effect_count": 1,
+            "effects": [{
+                "type": "MotionBlur",
+                "param_count": 1,
+                "param": [{
+                    "name": "radius",
+                    "value": 2.0
+                }]
+            }]
+        },
+        
+        {
+            "effect_count": 1,
+            "effects": [{
+                "type": "Blend_SourceOver",
+                "param_count": 1,
+                "param": [{
+                    "name": "strenth",
+                    "value": 1.0
+                }],
+                "res_count": 5,
+                "res": [{
+                    "name": "1_1.png",
+                    "width": 1024,
+                    "height": 1024
+                },
+                {
+                    "name": "3_4.png",
+                    "width": 770,
+                    "height": 1024
+                },
+                {
+                    "name": "4_3.png",
+                    "width": 1024,
+                    "height": 770
+                },
+                {
+                    "name": "16_9.png",
+                    "width": 1024,
+                    "height": 576
+                },
+                {
+                    "name": "9_16.png",
+                    "width": 576,
+                    "height": 1024
+                }
+                ]
+            }]
+        
+        }
+
+        ]
+    }
+}

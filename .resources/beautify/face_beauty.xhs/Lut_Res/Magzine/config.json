@@ -1,0 +1,38 @@
+{
+	"filterlist" : 
+	{
+		"group_count" : 1,
+		"groups" : 
+		[
+			{
+				"effect_count" : 1,
+				"effects" : 
+				[
+					{
+						"layout" : 0,
+						"param" : 
+						[
+							{
+								"name" : "strenth",
+								"value" : 1
+							}
+						],
+						"param_count" : 1,
+						"res" : 
+						[
+							{
+								"height" : 512,
+								"name" : "001.png",
+								"width" : 512
+							}
+						],
+						"res_count" : 1,
+						"type" : "Lookup"
+					}
+				]
+			}
+		]
+	},
+	"type" : 16,
+	"version" : 1
+}

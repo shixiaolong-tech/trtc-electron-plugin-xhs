@@ -1,0 +1,42 @@
+{
+  "license": "",
+  "userId": "",
+  "aiModelPath": "",            // loadAIModel
+  "beauty": {
+    "enable": true,             // enableBeauty
+    "resourcePath": "",         // setBeautyResourcePath
+    "types": [{
+      "type": 0,                // enableBeautyType
+      "enable": true,           // enableBeautyType, setBeautyTypeIntensity
+      "intensity": 1.0          // setBeautyTypeIntensity
+    },{
+      "type": 26,
+      "enable": true,
+      "intensity": 0.5
+    }]
+  },
+  "filter": {
+    "enable": true,             // enableFilter
+    "resourcePath": "",         // setFilterResourcePath   <resourcePath>\\<type> 组合成有效的入参
+    "type": "",                 // 取值示例：Forest America Real Rosy Sunlight Japenese
+    "intensity": 0.8,           // setFilterIntensity
+    "interval": {               // setFilterIntervalParam
+      "x": 0,
+      "y": 0,
+      "width": 100,
+      "height": 100,
+      "colorFlag": 1,
+      "pictureFlag": 0
+    }
+  },
+  "colorful": {
+    "enable": true,             // enableColorfulAdjustment
+    "types": [{
+      "type": 1,                // setColorfulTypeIntensity
+      "intensity": 0.1          // setColorfulTypeIntensity
+    },{
+      "type": 5,
+      "intensity": 0.9
+    }]
+  }
+}

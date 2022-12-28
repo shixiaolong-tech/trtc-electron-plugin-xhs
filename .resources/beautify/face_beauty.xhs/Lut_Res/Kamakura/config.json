@@ -1,0 +1,26 @@
+{
+    "verson": 1,
+    "type": 16,
+    "filterlist": {
+        "group_count": 1,
+        "groups": [{
+            "effect_count": 1,
+            "effects": [{
+                "type": "Lookup",
+                "param_count": 1,
+                "param": [{
+                    "name": "strenth",
+                    "value": 1.0
+                }],
+                "res_count": 1,
+                "res": [{
+                    "name": "001.png",
+                    "width": 512,
+                    "height": 512
+                    
+                }]
+            }]
+        }
+        ]
+    }
+}

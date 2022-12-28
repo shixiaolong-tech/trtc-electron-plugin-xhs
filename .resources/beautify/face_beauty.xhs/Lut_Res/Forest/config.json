@@ -1,0 +1,1 @@
+{"filterlist":{"group_count":2,"groups":[{"effects":[{"res_count":1,"param_count":1,"res":[{"height":512,"width":512,"name":"1.png"}],"type":"Lookup","param":[{"name":"strenth","value":1}]}],"effect_count":1},{"effects":[{"param":[{"value":0.25,"name":"strenth"}],"param_count":1,"res_count":0,"type":"Sharpen"}],"effect_count":1}]},"type":16,"version":1}

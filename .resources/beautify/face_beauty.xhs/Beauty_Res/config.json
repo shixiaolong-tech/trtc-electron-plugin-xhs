@@ -1,0 +1,70 @@
+{
+	"version": "0.0.1",
+	"resGroup": [{
+			"type": "smooth",
+			"folder": "smooth",
+			"res_count": 2,
+			"res": [{
+					"name": "mask.png"
+				},
+				{
+					"name": "lut.png"
+				}
+			]
+		},
+		{
+			"type": "whitening",
+			"folder": "whitening",
+			"res_count": 2,
+			"res": [{
+					"name": "cax_color_enhancement_curve.png"
+				},
+				{
+					"name": "lut.png"
+				}
+			]
+		},
+		{
+			"type": "whitenTeeth",
+			"folder": "whitenTeeth",
+			"res_count": 2,
+			"res": [{
+					"name": "mask.png"
+				},
+				{
+					"name": "lut.png"
+				}
+			]
+		},
+		{
+			"type": "sparkleEye",
+			"folder": "sparkleEye",
+			"res_count": 1,
+			"res": [{
+					"name": "mask.png"
+				}
+			]
+		},
+		{
+			"type": "lip",
+			"folder": "lip",
+			"res_count": 2,
+			"res": [{
+					"name": "mask.png"
+				},
+				{
+					"name": "lut.png"
+				}
+			]
+		},
+        {
+            "type": "localExfoliate",
+            "folder": "localExfoliate",
+            "res_count": 1,
+            "res": [{
+                    "name": "localExfoliate.png"
+                }
+            ]
+        }
+	]
+}

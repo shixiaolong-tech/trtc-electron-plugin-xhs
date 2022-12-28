@@ -1,0 +1,99 @@
+{
+    "verson": 1,
+    "type": 16,
+    "filterlist": {
+        "group_count": 4,
+        "groups": [
+        {
+            "effect_count": 1,
+            "effects": [{
+                "type": "FixedFrame",
+                "param_count": 1,
+                "param": [{
+                    "name": "strenth",
+                    "value": 1.0
+                }],
+                "res_count": 0
+            }]
+        },
+        
+        {
+            "effect_count": 1,
+            "effects": [{
+                "type": "Lookup",
+                "param_count": 1,
+                "param": [{
+                    "name": "strenth",
+                    "value": 1.0
+                }],
+                "res_count": 1,
+                "res": [{
+                    "name": "003.png",
+                    "width": 512,
+                    "height": 512
+                    
+                }]
+            }]
+        },
+        
+        {
+            "effect_count": 1,
+            "effects": [{
+                "type": "Focus_BoxBlur_Area",
+                "param_count": 1,
+                "param": [{
+                    "name": "strenth",
+                    "value": 1.0
+                }],
+                "res_count": 1,
+                "res": [{
+                    "name": "RED.png",
+                    "width": 512,
+                    "height": 512
+                    
+                }]
+            }]
+        },
+        {
+            "effect_count": 1,
+            "effects": [{
+                "type": "Blend_SourceOver",
+                "param_count": 1,
+                "param": [{
+                    "name": "strenth",
+                    "value": 1.0
+                }],
+                "res_count": 5,
+                "res": [{
+                    "name": "1_1.png",
+                    "width": 1024,
+                    "height": 1024
+                },
+                {
+                    "name": "3_4.png",
+                    "width": 770,
+                    "height": 1024
+                },
+                {
+                    "name": "4_3.png",
+                    "width": 1024,
+                    "height": 770
+                },
+                {
+                    "name": "16_9.png",
+                    "width": 1024,
+                    "height": 576
+                },
+                {
+                    "name": "9_16.png",
+                    "width": 576,
+                    "height": 1024
+                }
+                ]
+            }]
+        
+        }
+
+        ]
+    }
+}
