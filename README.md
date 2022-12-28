@@ -83,6 +83,8 @@ const params = {
   filter: {
     enable: false,
     resourcePath: filterResPath,
+    intensity: 0.9,
+    type: 'Forest',
   },
   colorful: {
     enable: true,
@@ -129,7 +131,9 @@ trtcCloud.destroyPluginManager();
 ```
 
 ## 注意:
-1. bug: 目前 intensity 设置 1.0 会处理失败，待兼容。
-2. 美颜插件目前在代码中固定设置为 debug 模式，会在工程下写 `xhs_debug.log` 日志。
+1. 美颜插件目前在代码中固定设置为 debug 模式，会在工程下写 `xhs_debug.log` 日志。可在 XHSBeautyPlugin.cpp 文件中创建美颜插件的构造函数中去掉 debug 模式。相关代码如下：
+```
+  enableDebug(true, "xhs_debug.log");
+```
 
 ## 参考文档
