@@ -14,8 +14,7 @@
 static FILE *g_pf = nullptr;
 bool g_debug = false;
 
-void log(const char* fmt, ...)
-{
+void log(const char* fmt, ...){
 	if (!g_debug || NULL == fmt)
 		return;
 
@@ -500,8 +499,6 @@ void XHSBeautyPlugin::onProcessVideoFrame(TRTCVideoFrame *srcFrame, TRTCVideoFra
   log("onProcessVideoFrame begin\n");
   log("frame src: length:%lu width:%lu height:%lu timestamp:%llu videoFormat:%lu pdata:%p\n",
     srcFrame->length, srcFrame->width, srcFrame->height, srcFrame->timestamp, (uint32_t)srcFrame->videoFormat, srcFrame->data);
-  log("frame dst: length:%lu width:%lu height:%lu timestamp:%llu videoFormat:%lu pdata:%p\n",
-    dstFrame->length, dstFrame->width, dstFrame->height, dstFrame->timestamp, (uint32_t)dstFrame->videoFormat, dstFrame->data);
   if (!srcFrame || !srcFrame->data) {
     return;
   }
@@ -512,7 +509,6 @@ void XHSBeautyPlugin::onProcessVideoFrame(TRTCVideoFrame *srcFrame, TRTCVideoFra
     if (!isGlInit) {
       initOpenGL();
       isGlInit = true;
-      log("onProcessVideoFrame OpenGL initted\n");
     } else {
 #ifdef _WIN32
       if (mHDc && mHRc) {
@@ -530,7 +526,6 @@ void XHSBeautyPlugin::onProcessVideoFrame(TRTCVideoFrame *srcFrame, TRTCVideoFra
         log("[E]onProcessVideoFrame set gl context error!\n");
         return;
       }
-      log("onProcessVideoFrame OpenGL context obtained\n");
     }
 
     // pre transcoding
@@ -539,8 +534,6 @@ void XHSBeautyPlugin::onProcessVideoFrame(TRTCVideoFrame *srcFrame, TRTCVideoFra
     uint8_t *y = (uint8_t*)srcFrame->data;
     uint8_t *u = (uint8_t*)(srcFrame->data + y_length);
     uint8_t *v = (uint8_t*)(srcFrame->data + y_length + u_v_length); 
-    log("Y U V addr: %p %p %p, y_length:%lu u_v_length:%lu\n", y, u, v, y_length, u_v_length);
-    log("onProcessVideoFrame extract src data\n");
 
     uint8_t* y_processed = (uint8_t*)dstFrame->data;
     uint8_t* u_processed = (uint8_t*)(dstFrame->data + y_length);
@@ -549,7 +542,6 @@ void XHSBeautyPlugin::onProcessVideoFrame(TRTCVideoFrame *srcFrame, TRTCVideoFra
       // transcoding
       m_pBeautyEngine->processYUV(y, u, v, srcFrame->width, srcFrame->height, 0.0f);
       m_pBeautyEngine->getOutputYUVData(y_processed, u_processed, v_processed);
-      log("Y U V addr processed: %p %p %p\n", y_processed, u_processed, v_processed);
 
       // post transcoding
       if (y_processed && u_processed && v_processed) {
@@ -569,7 +561,6 @@ void XHSBeautyPlugin::onProcessVideoFrame(TRTCVideoFrame *srcFrame, TRTCVideoFra
 #else
   CGLSetCurrentContext(NULL);
 #endif
-  log("onProcessVideoFrame OpenGL context released\n");
 
   log("onProcessVideoFrame end\n");
   return;
