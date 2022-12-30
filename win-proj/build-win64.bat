@@ -12,8 +12,8 @@ xcopy ..\XHS-beauty-lib\win\win64\*.* .\x64\Release\ /s/y
 echo "--------------------------------------build success!"
 
 echo "--------------------------------------zip build"
-rm -rf dist-temp 
-rm release-win64.zip
+rmdir /s/q dist-temp 
+del release-win64.zip
 
 mkdir dist-temp
 copy /Y x64\Release\* dist-temp\*
