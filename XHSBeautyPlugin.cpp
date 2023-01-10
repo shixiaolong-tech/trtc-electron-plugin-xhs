@@ -539,6 +539,10 @@ void XHSBeautyPlugin::onProcessVideoFrame(TRTCVideoFrame *srcFrame, TRTCVideoFra
     uint8_t* u_processed = (uint8_t*)(dstFrame->data + y_length);
     uint8_t* v_processed = (uint8_t*)(dstFrame->data + y_length + u_v_length); 
     try {
+      // 小红书的美颜库在未开启美颜和滤镜时，会直接 return，此时如果开启美颜插件，dstFrame->data 会是全零数据或者上一次开启时残留的最后一帧数据。
+      // 这里复制一次源数据，可以保证这个场景下，渲染出正常的视频，否则会出现绿屏帧或者上次美颜残留数据。
+      memcpy(dstFrame->data, srcFrame->data, srcFrame->length); 
+
       // transcoding
       m_pBeautyEngine->processYUV(y, u, v, srcFrame->width, srcFrame->height, 0.0f);
       m_pBeautyEngine->getOutputYUVData(y_processed, u_processed, v_processed);
