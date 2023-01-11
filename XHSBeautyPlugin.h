@@ -38,6 +38,8 @@ class XHSBeautyPlugin: public IVideoFramePlugin {
   protected:
     bool isLoaded = false;
     bool isEnabled = false;
+    std::string sLicense = "";
+    std::string sUserId = "";
     CG::XYCGWindowsEngine* m_pBeautyEngine = nullptr;
     std::string filterResourceBasePath = "";
     void handleAiModePathParam(const std::string path);

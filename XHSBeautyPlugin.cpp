@@ -68,13 +68,6 @@ XHSBeautyPlugin::XHSBeautyPlugin() {
     log("[E]new CG::XYCGWindowsEngine() error\n");
   }
   log("XHSBeautyPlugin create\n");
-
-  int is_ok = m_pBeautyEngine->initWindowsEngine("", "");
-  if (is_ok != 0) {
-    log("[E]initWindowsEngine error:%i\n", is_ok);
-    return;
-  }
-  log("initWindowsEngine success\n");
 }
 
 XHSBeautyPlugin::~XHSBeautyPlugin() {
@@ -83,6 +76,8 @@ XHSBeautyPlugin::~XHSBeautyPlugin() {
     m_pBeautyEngine->destroyWindowsEngine();
     m_pBeautyEngine = nullptr;
   }
+  sLicense.clear();
+  sUserId.clear();
 }
 
 bool XHSBeautyPlugin::init() {
@@ -347,6 +342,36 @@ bool XHSBeautyPlugin::setParameter(const char* param) {
     return false;
   }
 
+  if (d.HasMember("license")) {
+    Value& v_license = d["license"];
+    if (v_license.IsString()) {
+      sLicense = std::string(v_license.GetString(), v_license.GetStringLength());
+    } else {
+      log("[E]setParameter: 'license' type error\n");
+    }
+  }
+
+  if (d.HasMember("userId")) {
+    Value& v_userId = d["userId"];
+    if (v_userId.IsString()) {
+      sUserId = std::string(v_userId.GetString(), v_userId.GetStringLength());
+    } else {
+      log("[E]setParameter: 'userId' type error\n");
+    }
+  }
+
+  if (!sLicense.empty() && !sUserId.empty()) {
+    int is_ok = m_pBeautyEngine->initWindowsEngine(sLicense, sUserId);
+    if (is_ok != 0) {
+      log("[E]initWindowsEngine error:%i\n", is_ok);
+      return false;
+    }
+    log("initWindowsEngine success\n");
+  } else {
+    log("setParameter across with empty 'license' or 'userId'\n");
+    return false;
+  }
+
   if (d.HasMember("aiModelPath")) {
     Value& v_aiModelPath = d["aiModelPath"];
     if (v_aiModelPath.IsString()) {
@@ -497,9 +522,19 @@ class GLContextGuard {
 
 void XHSBeautyPlugin::onProcessVideoFrame(TRTCVideoFrame *srcFrame, TRTCVideoFrame *dstFrame){
   log("onProcessVideoFrame begin\n");
+  if (!srcFrame || !srcFrame->data) {
+    return;
+  }
   log("frame src: length:%lu width:%lu height:%lu timestamp:%llu videoFormat:%lu pdata:%p\n",
     srcFrame->length, srcFrame->width, srcFrame->height, srcFrame->timestamp, (uint32_t)srcFrame->videoFormat, srcFrame->data);
-  if (!srcFrame || !srcFrame->data) {
+  log("frame dst: length:%lu width:%lu height:%lu timestamp:%llu videoFormat:%lu pdata:%p\n",
+    dstFrame->length, dstFrame->width, dstFrame->height, dstFrame->timestamp, (uint32_t)dstFrame->videoFormat, dstFrame->data);
+
+  // 小红书的美颜库在未开启美颜和滤镜时，会直接 return，此时如果开启美颜插件，dstFrame->data 会是全零数据或者上一次开启时残留的最后一帧数据。
+  // 这里复制一次源数据，可以保证这个场景下，渲染出正常的视频，否则会出现绿屏帧或者上次美颜残留数据。
+  memcpy(dstFrame->data, srcFrame->data, srcFrame->length); 
+  if (sLicense.empty() || sUserId.empty()) {
+    // 未设置认证信息，跳过美颜接口调用
     return;
   }
 
@@ -539,10 +574,6 @@ void XHSBeautyPlugin::onProcessVideoFrame(TRTCVideoFrame *srcFrame, TRTCVideoFra
     uint8_t* u_processed = (uint8_t*)(dstFrame->data + y_length);
     uint8_t* v_processed = (uint8_t*)(dstFrame->data + y_length + u_v_length); 
     try {
-      // 小红书的美颜库在未开启美颜和滤镜时，会直接 return，此时如果开启美颜插件，dstFrame->data 会是全零数据或者上一次开启时残留的最后一帧数据。
-      // 这里复制一次源数据，可以保证这个场景下，渲染出正常的视频，否则会出现绿屏帧或者上次美颜残留数据。
-      memcpy(dstFrame->data, srcFrame->data, srcFrame->length); 
-
       // transcoding
       m_pBeautyEngine->processYUV(y, u, v, srcFrame->width, srcFrame->height, 0.0f);
       m_pBeautyEngine->getOutputYUVData(y_processed, u_processed, v_processed);
