@@ -342,34 +342,27 @@ bool XHSBeautyPlugin::setParameter(const char* param) {
     return false;
   }
 
-  if (d.HasMember("license")) {
+  if (d.HasMember("license") && d.HasMember("userId")) {
     Value& v_license = d["license"];
-    if (v_license.IsString()) {
-      sLicense = std::string(v_license.GetString(), v_license.GetStringLength());
-    } else {
-      log("[E]setParameter: 'license' type error\n");
-    }
-  }
-
-  if (d.HasMember("userId")) {
     Value& v_userId = d["userId"];
-    if (v_userId.IsString()) {
+    if (v_license.IsString() && v_userId.IsString()) {
+      sLicense = std::string(v_license.GetString(), v_license.GetStringLength());
       sUserId = std::string(v_userId.GetString(), v_userId.GetStringLength());
-    } else {
-      log("[E]setParameter: 'userId' type error\n");
-    }
-  }
 
-  if (!sLicense.empty() && !sUserId.empty()) {
-    int is_ok = m_pBeautyEngine->initWindowsEngine(sLicense, sUserId);
-    if (is_ok != 0) {
-      log("[E]initWindowsEngine error:%i\n", is_ok);
-      return false;
+      if (!sLicense.empty() && !sUserId.empty()) {
+        int is_ok = m_pBeautyEngine->initWindowsEngine(sLicense, sUserId);
+        if (is_ok != 0) {
+          log("[E]initWindowsEngine error:%i\n", is_ok);
+          return false;
+        }
+        log("initWindowsEngine success\n");
+      } else {
+        log("[E]initWindowsEngine across with empty 'license' or 'userId'\n");
+        return false;
+      }
+    } else {
+      log("[E]setParameter: 'license' or 'userId' type error\n");
     }
-    log("initWindowsEngine success\n");
-  } else {
-    log("setParameter across with empty 'license' or 'userId'\n");
-    return false;
   }
 
   if (d.HasMember("aiModelPath")) {
