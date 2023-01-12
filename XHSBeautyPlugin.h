@@ -38,6 +38,7 @@ class XHSBeautyPlugin: public IVideoFramePlugin {
   protected:
     bool isLoaded = false;
     bool isEnabled = false;
+    bool isBeautyEngineInited = false;
     std::string sLicense = "";
     std::string sUserId = "";
     CG::XYCGWindowsEngine* m_pBeautyEngine = nullptr;

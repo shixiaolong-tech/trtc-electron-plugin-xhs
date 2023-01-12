@@ -78,6 +78,7 @@ XHSBeautyPlugin::~XHSBeautyPlugin() {
   }
   sLicense.clear();
   sUserId.clear();
+  isBeautyEngineInited = false;
 }
 
 bool XHSBeautyPlugin::init() {
@@ -360,15 +361,16 @@ bool XHSBeautyPlugin::setParameter(const char* param) {
     }
   }
 
-  if (!sLicense.empty() && !sUserId.empty()) {
+  if (!sLicense.empty() && !sUserId.empty() && d.HasMember("userId") && d.HasMember("license") ) {
     int is_ok = m_pBeautyEngine->initWindowsEngine(sLicense, sUserId);
     if (is_ok != 0) {
       log("[E]initWindowsEngine error:%i\n", is_ok);
       return false;
     }
+    isBeautyEngineInited = true;
     log("initWindowsEngine success\n");
-  } else {
-    log("setParameter across with empty 'license' or 'userId'\n");
+  }
+  if(!isBeautyEngineInited) {
     return false;
   }
 
