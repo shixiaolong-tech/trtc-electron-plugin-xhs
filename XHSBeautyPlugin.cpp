@@ -343,24 +343,6 @@ bool XHSBeautyPlugin::setParameter(const char* param) {
     return false;
   }
 
-  if (d.HasMember("license")) {
-    Value& v_license = d["license"];
-    if (v_license.IsString()) {
-      sLicense = std::string(v_license.GetString(), v_license.GetStringLength());
-    } else {
-      log("[E]setParameter: 'license' type error\n");
-    }
-  }
-
-  if (d.HasMember("userId")) {
-    Value& v_userId = d["userId"];
-    if (v_userId.IsString()) {
-      sUserId = std::string(v_userId.GetString(), v_userId.GetStringLength());
-    } else {
-      log("[E]setParameter: 'userId' type error\n");
-    }
-  }
-
   if (!sLicense.empty() && !sUserId.empty() && d.HasMember("userId") && d.HasMember("license") ) {
     int is_ok = m_pBeautyEngine->initWindowsEngine(sLicense, sUserId);
     if (is_ok != 0) {
